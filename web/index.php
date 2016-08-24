@@ -1,0 +1,19 @@
+<?php
+
+//require_once __DIR__.'/../vendor/autoload.php';
+//
+//$app = new Silex\Application();
+//
+//$app->get('/hello', function () {
+//    return 'Hello!';
+//});
+//
+//$app['debug'] = true;
+//
+//$app->run();
+
+$app = require_once __DIR__ . '/../app/app.php';
+
+//die('HUJ');
+
+$app->run();

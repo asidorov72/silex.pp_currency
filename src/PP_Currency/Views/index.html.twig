@@ -1,0 +1,66 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PP Currency :: index</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/style.css">
+</head>
+
+<body>
+    {% for errors in app.session.getFlashBag.get('alerts') %}
+    <div data-alert class="alert-box {{ errors|raw }}">
+       <ul>
+            {% if errors['alert'] is defined %}
+                {% for key, error in errors['alert'] %}
+                <li style="color:red">{{ error|raw }}</li>
+                {% endfor %}
+            {% endif %}
+            {% if errors['notice'] is defined %}
+                {% for key, error in errors['notice'] %}
+                <li style="color:green">{{ error|raw }}</li>
+                {% endfor %}
+            {% endif %}
+       </ul>
+    </div>
+    {% endfor %}
+  
+       
+    {% if resultRates|length %} 
+    {{ dump(resultRates) }}
+    {% endif %}
+    
+    
+    {{ form_start(form, {'name' : 'currencyForm', 'method' : 'post'}) }}
+    
+    {{ form_widget(form, { 'attr': {'class': 'currency_form'}}) }}
+ 
+    <div>
+    {{ form_row(form.amount, {'label': 'Currency I have: ', 'label_attr': {'class': 'label'}}) }}
+    {{ form_widget(form.amount) }}
+    </div>
+   
+    <div>
+    {{ form_row(form.currencyFrom, {'label': 'Currency I have: ', 'label_attr': {'class': 'label'}}) }}
+    {{ form_widget(form.currencyFrom) }}
+    </div>
+    
+    <div>
+    {{ form_row(form.currencyTo, {'label': 'Currency I want: ', 'label_attr': {'class': 'label'}}) }}
+    {{ form_widget(form.currencyTo) }}
+    </div>
+    
+    <div>
+    {{ form_widget(form.convert, { 'attr': {'class': 'button'}}) }}
+    </div>
+    
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+</body>
+</html>
