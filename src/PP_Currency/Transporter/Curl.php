@@ -105,7 +105,7 @@ class Curl implements TransporterInterface
     
     public function getContent($url) {
         $result = file_get_contents($url);
-        var_dump($result);
+        //var_dump($result);
         return $result;
     }
     
@@ -114,10 +114,10 @@ class Curl implements TransporterInterface
         $this
             ->setOpt(CURLOPT_URL, $url)    
             ->setOpt(CURLOPT_RETURNTRANSFER, true)
-            ->setOpt(CURLOPT_PROXY, 'cntlm-proxy:3128')
-            ->setOpt(CURLOPT_PROXYAUTH, CURLAUTH_NTLM)
             ->setOpt(CURLOPT_CONNECTTIMEOUT , $this->app['config']['curl_connect_timeout'])
-            ->setOpt(CURLOPT_TIMEOUT, $this->app['config']['curl_request_timeout']);
+            ->setOpt(CURLOPT_TIMEOUT, $this->app['config']['curl_request_timeout'])
+            ->setOpt(CURLOPT_PROXYAUTH, CURLAUTH_NTLM)
+            ->setOpt(CURLOPT_PROXY, $this->app['config']['curl_proxy']);
             /*->setOpt(CURLOPT_FOLLOWLOCATION, false);*/
         
         $result = $this->exec();
