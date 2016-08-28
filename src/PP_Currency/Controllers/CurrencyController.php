@@ -109,9 +109,9 @@ class CurrencyController
             } else {
                 foreach ($errors as $error) {
                     //$alerts[] = $error->getPropertyPath().' '.$error->getMessage()."\n";
-                     $alerts['alert'][] = $error->getMessage();
+                    $alerts['alert'][] = $error->getMessage();
                 }
-                //$alerts['notice'][] = "TEST";
+                $alerts['notice'][] = "TEST";
                 $this->session->getFlashBag()->add( 'alerts', $alerts );
             }   
         }

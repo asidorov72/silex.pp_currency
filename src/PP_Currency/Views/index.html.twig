@@ -14,7 +14,7 @@
 
 <body>
     {% for errors in app.session.getFlashBag.get('alerts') %}
-    <div data-alert class="alert-box {{ errors|raw }}">
+    <div data-alert class="alert-box">
        <ul>
             {% if errors['alert'] is defined %}
                 {% for key, error in errors['alert'] %}
@@ -29,12 +29,10 @@
        </ul>
     </div>
     {% endfor %}
-  
        
-    {% if resultRates|length %} 
+    {% if resultRates|length %}
     {{ dump(resultRates) }}
     {% endif %}
-    
     
     {{ form_start(form, {'name' : 'currencyForm', 'method' : 'post'}) }}
     
