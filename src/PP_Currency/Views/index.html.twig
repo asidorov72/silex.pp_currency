@@ -8,7 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>PP Currency :: index</title>
     <meta name="description" content="">
-    <meta name="author" content="">
+    {% block javascripts %} 
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/custom.js"></script> 
+    {% endblock %}
     <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/style.css">
 </head>
 
@@ -30,9 +33,9 @@
     </div>
     {% endfor %}
        
-    {% if resultRates|length %}
-    {{ dump(resultRates) }}
-    {% endif %}
+    {#% if resultRates|length %#}
+    {#{ dump(resultRates) }#}
+    {#% endif %#}
     
     {{ form_start(form, {'name' : 'currencyForm', 'method' : 'post'}) }}
     

@@ -39,9 +39,14 @@ class CurrencyController
                 array($this->config['default_base_code'])
             );
 
-        $resultRates  = array();
-        $currencyRepository = $this->getCurrencyRepository();
-        $ratesCodesList     = ToolsHelper::getCurrencyCodes(
+        $resultRates         = array();
+        $requestRes          = array();
+        $requestRes['rates'] = array();
+        $alerts              = array();
+        $errors              = array();
+        
+        $currencyRepository  = $this->getCurrencyRepository();
+        $ratesCodesList      = ToolsHelper::getCurrencyCodes(
                 $currencyRepository->getLatestRates($latestRatesByBaseUrl)
             );
         ToolsHelper::addAssocElement($ratesCodesList, array('key' => $this->config['default_base_code'], 'value' => $this->config['default_base_code']));
@@ -78,8 +83,7 @@ class CurrencyController
             ->getForm();
         
         $form->handleRequest($this->request);
-        
-        $alerts = array();
+
         $errors = $this->app['validator']->validate($form->get('amount')->getData(), 
                array(
                    new Assert\Regex(array(
@@ -93,27 +97,27 @@ class CurrencyController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (!count($errors)) {
-                $resultRates = $form->getData(); 
+                $resultRates = $form->getData();
                 
-                /*
-                 * STEPS to produce:
-                 * -----------------------------
-                 * 1. Get RATES by BASE (currencyFrom):
-                 *    http://api.fixer.io/latest?base={currencyFrom}
-                 * 2. In the received rates array get {currencyTo} value
-                 * 3. Count the result rate using fields: amount and currencyTo
-                 */
-//              do something with the data
-//              redirect somewhere
-//              return $this->app->redirect('...');
+                $latestRatesByCodes = UrlHelper::replaceParams(
+                    $this->config['GET_REQUEST_URL']['rates_by_base_and_codes'],
+                    array('{CURRENCY_CODE}','{COMMA_SEP_CODES}'),
+                    array($resultRates['currencyFrom'], $resultRates['currencyTo'])
+                );
+                $requestRes = $currencyRepository->getLatestRates($latestRatesByCodes);
+                
+                $ratesToOutput = $this->calculateRates(
+                        $resultRates['amount'], 
+                        $requestRes['rates'][$resultRates['currencyTo']]
+                    );
+                $alerts['notice'][] = $ratesToOutput;
             } else {
                 foreach ($errors as $error) {
                     //$alerts[] = $error->getPropertyPath().' '.$error->getMessage()."\n";
                     $alerts['alert'][] = $error->getMessage();
-                }
-                $alerts['notice'][] = "TEST";
-                $this->session->getFlashBag()->add( 'alerts', $alerts );
+                }   
             }   
+            $this->session->getFlashBag()->add( 'alerts', $alerts );
         }
             
         /*** FORM :: end ***/
@@ -130,5 +134,13 @@ class CurrencyController
     protected function getCurrencyRepository()
     {
         return $this->app['currency.repository'];
+    }
+    
+    protected function calculateRates($amount, $crncyTo)
+    {
+        $calcRates = 0;
+        //$calcRates = number_format($amount * $crncyTo, 2);
+        $calcRates = ToolsHelper::formatMoney($amount * $crncyTo, true);
+        return $calcRates;
     }
 }
