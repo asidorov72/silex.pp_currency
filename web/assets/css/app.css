@@ -1,0 +1,67 @@
+html, body {
+    height: auto;
+}
+
+.button {
+    text-transform: uppercase;
+}
+
+.mainWrap.callout {
+    padding-bottom: 10px;
+}
+
+.mainWrap .alert-box-ul {
+    margin-top: 15px;
+    margin-bottom: 7px;
+}
+
+.mainWrap p {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.exchangeBtnWrap {
+    padding-left:0;
+    padding-right:0;
+}
+.exchangeBtnWrap div {
+    display:inline-block;
+    position:relative;
+}
+
+.fullWidth {
+   width: 100%;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.row.topMargin10 {
+   margin-top: 1rem; 
+}
+
+ul .rates-list  {
+    list-style-type: none;
+    color: navy;
+}
+
+ul .rates-list h3 {
+    color: #2199e8;
+}
+
+.button.exchangeBtn {
+    margin:0;
+    padding-top:10px;
+    padding-bottom:10px;
+    width: 100%;
+    font-size: larger;
+    /*color: #2199e8;*/
+    color: white;
+    background: orange;
+}
+
+.formElementsLevel {
+    margin-top: 24px;
+}
+
+
+
