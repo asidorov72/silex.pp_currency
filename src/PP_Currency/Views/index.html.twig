@@ -8,60 +8,90 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>PP Currency :: index</title>
     <meta name="description" content="">
-    {% block javascripts %} 
-    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/jquery-3.1.0.min.js"></script>
-    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/custom.js"></script> 
-    {% endblock %}
-    <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/style.css">
+    <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/foundation.css">
+    <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/app.css">
 </head>
 
 <body>
-    {% for errors in app.session.getFlashBag.get('alerts') %}
-    <div data-alert class="alert-box">
-       <ul>
-            {% if errors['alert'] is defined %}
-                {% for key, error in errors['alert'] %}
-                <li style="color:red">{{ error|raw }}</li>
-                {% endfor %}
-            {% endif %}
-            {% if errors['notice'] is defined %}
-                {% for key, error in errors['notice'] %}
-                <li style="color:green">{{ error|raw }}</li>
-                {% endfor %}
-            {% endif %}
-       </ul>
-    </div>
-    {% endfor %}
+    
        
     {#% if resultRates|length %#}
     {#{ dump(resultRates) }#}
     {#% endif %#}
     
     {{ form_start(form, {'name' : 'currencyForm', 'method' : 'post'}) }}
+    {#{ form_widget(form, { 'attr': {'class': 'currency_form'}}) }#}
     
-    {{ form_widget(form, { 'attr': {'class': 'currency_form'}}) }}
- 
-    <div>
-    {{ form_row(form.amount, {'label': 'Currency I have: ', 'label_attr': {'class': 'label'}}) }}
-    {{ form_widget(form.amount) }}
-    </div>
-   
-    <div>
-    {{ form_row(form.currencyFrom, {'label': 'Currency I have: ', 'label_attr': {'class': 'label'}}) }}
-    {{ form_widget(form.currencyFrom) }}
-    </div>
+    <!--<div class="row">
+      <div class="large-12 columns">
+        <h1>Welcome to My Converter</h1>
+      </div>
+    </div>-->
     
-    <div>
-    {{ form_row(form.currencyTo, {'label': 'Currency I want: ', 'label_attr': {'class': 'label'}}) }}
-    {{ form_widget(form.currencyTo) }}
-    </div>
-    
-    <div>
-    {{ form_widget(form.convert, { 'attr': {'class': 'button'}}) }}
+    <div class="row topMargin10">
+        <div class="small-6 columns">
+            <div class="mainWrap callout">
+                <h3>PP Currency Converter</h3>
+                <p>The PP Currency Converter is using the <span><a href="http://fixer.io/" target="_blank">Fixer.io</a></span> API's data - free JSON API for current and historical foreign exchange rates published by the European Central Bank.</p>
+                <p>The rates are updated daily around 4PM CET.</p>
+                
+                {% for errors in app.session.getFlashBag.get('alerts') %}
+                <div data-alert class="alert-box">
+                   <ul class="alert-box-ul">
+                        {% if errors['alert'] is defined %}
+                            {% for key, error in errors['alert'] %}
+                            <li style="color:red">{{ error|raw }}</li>
+                            {% endfor %}
+                        {% endif %}
+                        {% if errors['notice'] is defined %}
+                            {% for key, error in errors['notice'] %}
+                            <li style="color:green">{{ error|raw }}</li>
+                            {% endfor %}
+                        {% endif %}
+                        {% if errors['rates'] is defined %}
+                            {% for key, error in errors['rates'] %}
+                            <li class="rates-list">{{ error|raw }}</li>
+                            {% endfor %}
+                        {% endif %}
+                   </ul>
+                </div>
+                {% endfor %}
+          
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <p>{{ form_row(form.amount) }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="medium-5 columns">
+                        <p>{{ form_row(form.currencyFrom) }}</p>
+                    </div>
+                    <div class="exchangeBtnWrap medium-2 columns formElementsLevel text-center">
+                        <p>{{ form_row(form.exchange, {'label': ' ', 'attr': {'class': 'button exchangeBtn fa fa-exchange'}}) }}</p>
+                    </div>
+                    <div class="medium-5 columns">
+                        <p>{{ form_row(form.currencyTo) }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <p>{{ form_row(form.convert, { 'attr': {'class': 'button fullWidth convertBtn'}}) }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     {{ form_rest(form) }}
     {{ form_end(form) }}
-
+   
+    {% block javascripts %} 
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/vendor/jquery.js"></script>
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/vendor/what-input.js"></script>
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/vendor/foundation.js"></script>
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/app.js"></script> 
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/custom.js"></script> 
+    {% endblock %}
 </body>
 </html>

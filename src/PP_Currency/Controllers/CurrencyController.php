@@ -67,15 +67,21 @@ class CurrencyController
                 )
             )
             ->add('currencyFrom', 'choice', array(
-                'placeholder' => 'Select Currency',
+                /*'placeholder' => 'Select Currency',*/
                 'choices' => $ratesCodesList,
                 'required' => true,
+                'label' => 'Currency I Have:',
                 'data' => $this->config['default_base_code'],
                 'expanded' => false
             ))
+            ->add('exchange', 'button', array(
+                'attr' => array(
+                ))
+            )
             ->add('currencyTo', 'choice', array(
-                'placeholder' => 'Select Currency',
+                /*'placeholder' => 'Select Currency',*/
                 'choices' => $ratesCodesList,
+                'label' => 'Currency I Want:',
                 'required' => true,
                 'expanded' => false
             ))
@@ -99,6 +105,8 @@ class CurrencyController
             if (!count($errors)) {
                 $resultRates = $form->getData();
                 
+                //var_dump($resultRates);
+                
                 $latestRatesByCodes = UrlHelper::replaceParams(
                     $this->config['GET_REQUEST_URL']['rates_by_base_and_codes'],
                     array('{CURRENCY_CODE}','{COMMA_SEP_CODES}'),
@@ -108,15 +116,18 @@ class CurrencyController
                 
                 $ratesToOutput = $this->calculateRates(
                         $resultRates['amount'], 
-                        $requestRes['rates'][$resultRates['currencyTo']]
+                        $requestRes['rates'][$resultRates['currencyTo']], 
+                        $resultRates['currencyFrom'], 
+                        $resultRates['currencyTo']
                     );
-                $alerts['notice'][] = $ratesToOutput;
+                //$alerts['notice'][] = $ratesToOutput;
+                $alerts['rates'][] = $ratesToOutput;
             } else {
                 foreach ($errors as $error) {
                     //$alerts[] = $error->getPropertyPath().' '.$error->getMessage()."\n";
                     $alerts['alert'][] = $error->getMessage();
-                }   
-            }   
+                }
+            }
             $this->session->getFlashBag()->add( 'alerts', $alerts );
         }
             
@@ -136,11 +147,13 @@ class CurrencyController
         return $this->app['currency.repository'];
     }
     
-    protected function calculateRates($amount, $crncyTo)
+    protected function calculateRates($amount, $crncyToValue, $crncyFromCode, $crncyToCode)
     {
-        $calcRates = 0;
+        $outputRates = '';
         //$calcRates = number_format($amount * $crncyTo, 2);
-        $calcRates = ToolsHelper::formatMoney($amount * $crncyTo, true);
-        return $calcRates;
+        $calcRates = ToolsHelper::formatMoney($amount * $crncyToValue, true);
+        $outputRates = '<h3>' . $amount . ' <span>' . $crncyFromCode . '</span> = ' . $calcRates . ' <span>' . $crncyToCode . '</span></h3>';
+        $outputRates .= '<span>1 ' . $crncyFromCode . ' = ' . $crncyToValue . ' ' . $crncyToCode . '</span>';
+        return $outputRates;
     }
 }
