@@ -111,6 +111,16 @@ $( document ).ready(function() {
         })
     .trigger( "change" );
   
-  
+    /**
+     * Foundation-datepicker code
+     * http://foundation-datepicker.peterbeno.com/example.html
+     */
+    $(function(){
+        $('#ratesDate').fdatepicker({
+                initialDate: '01/01/2001',
+                format: 'dd/mm/yyyy',
+                disableDblClickSelection: true
+            });
+    });
   
 });

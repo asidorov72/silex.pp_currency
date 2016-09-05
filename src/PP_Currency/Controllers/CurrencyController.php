@@ -53,17 +53,30 @@ class CurrencyController
         
         /*** FORM :: begin ***/
         
+        //var_dump(date("d/m/Y"));
+        
         /*
          * Default values for the form elements
          */
         $data = array(
-            'amount' => '1'
+            'amount' => '1',
+            'ratesDate' => date("d/m/Y")
         );
 
         $form = $this->app['form.factory']->createBuilder('form', $data, array('csrf_protection' => false))
             ->add('amount', 'text', array(
+                    'label' => 'Amount:',
                     'required' => true,
                     'attr' => array('class' => 'wrapper')
+                )
+            )
+            ->add('ratesDate', 'text', array(
+                    'label' => ' ',
+                    'required' => false,
+                    'attr' => array(
+                        'class' => 'wrapper ratesDateInput',
+                        'readonly' => 'readonly'
+                    )
                 )
             )
             ->add('currencyFrom', 'choice', array(
@@ -107,10 +120,14 @@ class CurrencyController
                 
                 //var_dump($resultRates);
                 
+                ToolsHelper::formatDate($resultRates['ratesDate']);
+                
+                //var_dump($resultRates['ratesDate']);
+                
                 $latestRatesByCodes = UrlHelper::replaceParams(
-                    $this->config['GET_REQUEST_URL']['rates_by_base_and_codes'],
-                    array('{CURRENCY_CODE}','{COMMA_SEP_CODES}'),
-                    array($resultRates['currencyFrom'], $resultRates['currencyTo'])
+                    $this->config['GET_REQUEST_URL']['rates_by_date_base_and_codes'],
+                    array('{yyyy-mm-dd}','{CURRENCY_CODE}','{COMMA_SEP_CODES}'),
+                    array($resultRates['ratesDate'], $resultRates['currencyFrom'], $resultRates['currencyTo'])
                 );
                 $requestRes = $currencyRepository->getLatestRates($latestRatesByCodes);
                 

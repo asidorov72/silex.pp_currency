@@ -2,6 +2,17 @@ html, body {
     height: auto;
 }
 
+.no-pad-right {
+    padding-right: 0;
+}
+.no-pad-left{
+    padding-left: 0;
+}
+
+.pad-left-6px {
+     padding-left: 6px;
+}
+
 .button {
     text-transform: uppercase;
 }
@@ -57,6 +68,45 @@ ul .rates-list h3 {
     /*color: #2199e8;*/
     color: white;
     background: orange;
+}
+
+.date-rates-input.column:last-child:not(:first-child), .date-rates-input.columns:last-child:not(:first-child) {
+    float: left;
+}
+
+.date-rates-wrap.row .row.collapse {
+    margin-left: 0;
+    /* margin-right: 0; */
+}
+
+.ratesDateInput {
+    display:inline-block;
+    margin:0;
+    float: left;
+    width:100%;
+}
+
+.button.dateBtn {
+    display:table;
+    /*margin:0;*/
+    padding:0;
+    width: auto;
+    font-size: larger;
+    color: #0a0a0a;
+    background: #c0c0c0;
+    /*color: white;
+    background: orange;*/
+}
+
+.button.dateBtn span.prefix {
+    display:inline-block;
+    padding:7px 10px 7px 10px;
+    font-size: larger;
+    /*color: #2199e8;
+    color: #0a0a0a;
+    background: none;
+    color: white;
+    background: orange;*/
 }
 
 .formElementsLevel {
