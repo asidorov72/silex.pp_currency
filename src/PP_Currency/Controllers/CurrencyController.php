@@ -70,6 +70,10 @@ class CurrencyController
                     'attr' => array('class' => 'wrapper')
                 )
             )
+            ->add('refresh', 'button', array(
+                'attr' => array(
+                ))
+            )
             ->add('ratesDate', 'text', array(
                     'label' => ' ',
                     'required' => false,
@@ -135,7 +139,8 @@ class CurrencyController
                         $resultRates['amount'], 
                         $requestRes['rates'][$resultRates['currencyTo']], 
                         $resultRates['currencyFrom'], 
-                        $resultRates['currencyTo']
+                        $resultRates['currencyTo'],
+                        $resultRates['ratesDate']
                     );
                 //$alerts['notice'][] = $ratesToOutput;
                 $alerts['rates'][] = $ratesToOutput;
@@ -164,13 +169,18 @@ class CurrencyController
         return $this->app['currency.repository'];
     }
     
-    protected function calculateRates($amount, $crncyToValue, $crncyFromCode, $crncyToCode)
+    protected function calculateRates($amount, $crncyToValue, $crncyFromCode, $crncyToCode, $ratesDate)
     {
         $outputRates = '';
         //$calcRates = number_format($amount * $crncyTo, 2);
         $calcRates = ToolsHelper::formatMoney($amount * $crncyToValue, true);
         $outputRates = '<h3>' . $amount . ' <span>' . $crncyFromCode . '</span> = ' . $calcRates . ' <span>' . $crncyToCode . '</span></h3>';
         $outputRates .= '<span>1 ' . $crncyFromCode . ' = ' . $crncyToValue . ' ' . $crncyToCode . '</span>';
+        
+        $date=date_create($ratesDate);
+        $ratesDate = date_format($date,"D, d M Y");
+
+        $outputRates .= ' /<span>' . $ratesDate . '</span>/';
         return $outputRates;
     }
 }

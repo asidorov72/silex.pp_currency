@@ -31,11 +31,11 @@ html, body {
     margin-bottom: 5px;
 }
 
-.exchangeBtnWrap {
+.buttonWrap {
     padding-left:0;
     padding-right:0;
 }
-.exchangeBtnWrap div {
+.buttonWrap div {
     display:inline-block;
     position:relative;
 }
@@ -59,7 +59,7 @@ ul .rates-list h3 {
     color: #2199e8;
 }
 
-.button.exchangeBtn {
+.button.orangeBtn {
     margin:0;
     padding-top:10px;
     padding-bottom:10px;
