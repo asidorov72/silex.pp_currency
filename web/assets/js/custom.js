@@ -88,6 +88,20 @@ $( document ).ready(function() {
         sortSelectOptions("[name='"+dropDownListName+"']", false);
     }
     
+    function getTodayDate()
+    {
+        var d = new Date();
+
+        var month = d.getMonth()+1;
+        var day = d.getDate();
+        
+        var output = (day<10 ? '0' : '') + day + '/'
+            + (month<10 ? '0' : '') + month + '/'
+            + d.getFullYear();
+            
+        return output;
+    }
+    
    
   
   
@@ -110,6 +124,14 @@ $( document ).ready(function() {
             sortSelectOptions("[name='form[currencyTo]']", false);
         })
     .trigger( "change" );
+    
+    
+    $('#form_refresh').click(function(){
+         
+        var today = getTodayDate();
+        $('#form_ratesDate').val(today);
+    });
+    
   
     /**
      * Foundation-datepicker code

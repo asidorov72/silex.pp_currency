@@ -67,8 +67,11 @@
                 {% endfor %}
           
                 <div class="row">
-                    <div class="medium-7 columns">
+                    <div class="medium-5 columns">
                         <p>{{ form_row(form.amount) }}</p>
+                    </div>
+                    <div class="buttonWrap medium-2 columns formElementsLevel text-center">
+                        <p>{{ form_row(form.refresh, {'label': ' ', 'attr': {'class': 'button orangeBtn fa fa-refresh'}}) }}</p>
                     </div>
                     <div class="medium-5 columns text-center">
                         <p>
@@ -87,8 +90,8 @@
                     <div class="medium-5 columns">
                         <p>{{ form_row(form.currencyFrom) }}</p>
                     </div>
-                    <div class="exchangeBtnWrap medium-2 columns formElementsLevel text-center">
-                        <p>{{ form_row(form.exchange, {'label': ' ', 'attr': {'class': 'button exchangeBtn fa fa-exchange'}}) }}</p>
+                    <div class="buttonWrap medium-2 columns formElementsLevel text-center">
+                        <p>{{ form_row(form.exchange, {'label': ' ', 'attr': {'class': 'button orangeBtn fa fa-exchange'}}) }}</p>
                     </div>
                     <div class="medium-5 columns">
                         <p>{{ form_row(form.currencyTo) }}</p>
