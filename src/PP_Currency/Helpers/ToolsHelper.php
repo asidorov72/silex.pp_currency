@@ -68,7 +68,7 @@ class ToolsHelper
      * @param bool $fractional
      * @return float
      */
-    function formatMoney($number, $fractional=false)
+    public static function formatMoney($number, $fractional=false)
     { 
         if ($fractional) {
             $number = sprintf('%.2f', $number); 
@@ -83,5 +83,17 @@ class ToolsHelper
         } 
         return $number; 
     } 
+    
+    
+    /**
+     * This function replaces this date format 'dd/mm/yyyy'
+     * to the this one 'yyyy-mm-dd'
+     * 
+     * @param string $date
+     */
+    public static function formatDate(&$date) 
+    {
+        $date = preg_replace('/(\d{2})\/(\d{2})\/(\d{4})/i', '$3-$2-$1', $date);
+    }
     
 }

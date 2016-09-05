@@ -9,8 +9,16 @@
     <title>PP Currency :: index</title>
     <meta name="description" content="">
     <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/foundation.css">
-    <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/foundation-datepicker.css">
     <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost }}/assets/css/app.css">
+    <!-- LOcales usinh EXAMPLE -->
+    <!-- <script src="js/locales/foundation-datepicker.sk.js"></script>
+    <script>
+    $('.fdatepicker').fdatepicker({
+      language: 'sk'
+    });
+    </script> -->
 </head>
 
 <body>
@@ -59,8 +67,20 @@
                 {% endfor %}
           
                 <div class="row">
-                    <div class="medium-12 columns">
+                    <div class="medium-7 columns">
                         <p>{{ form_row(form.amount) }}</p>
+                    </div>
+                    <div class="medium-5 columns text-center">
+                        <p>
+                            <div class="date-rates-wrap row collapse date" id="ratesDate" data-date-format="dd/mm/yyyy">
+                                <div class="medium-2 columns button dateBtn formElementsLevel">
+                                    <span class="prefix"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <div class="medium-8 date-rates-input columns formElementsLevel">
+                                    {{ form_row(form.ratesDate) }}
+                                </div>
+                            </div>
+                        </p>
                     </div>
                 </div>
                 <div class="row">
@@ -90,7 +110,8 @@
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/vendor/jquery.js"></script>
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/vendor/what-input.js"></script>
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/vendor/foundation.js"></script>
-    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/app.js"></script> 
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/app.js"></script>
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/foundation-datepicker.js"></script>
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/custom.js"></script> 
     {% endblock %}
 </body>
