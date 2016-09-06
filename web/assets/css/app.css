@@ -20,6 +20,7 @@ html, body {
 .mainWrap.callout {
     padding-bottom: 10px;
     background: url('../images/shutterstock_215289142.jpg') top center no-repeat;
+    border: 5px solid #2199e8;
 }
 
 .mainWrap .alert-box-ul {

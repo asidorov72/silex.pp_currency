@@ -26,11 +26,12 @@ return array(
   'latest_rates_cross_domains' => 'https://api.fixer.io/latest?callback=?'
                 ),
     'default_base_code' => 'BGN',
-	'controller'  => '',
+    'controller'  => '',
     'curl_connect_timeout' => 30,
     'curl_request_timeout' => 200,
     'curl_proxy' => null,
-    'curl_request_debug'   => 0
+    'curl_request_debug'   => 0,
+    'currencies_JSON' => __DIR__ . '/Common-Currency.json'
 );
 
 

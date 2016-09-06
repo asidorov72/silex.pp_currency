@@ -65,6 +65,29 @@ class ToolsHelper
         asort($currArray);
     }
     
+    public static function addCurrencyName(&$currArray, $ratesCodesListFileURL)
+    {
+        $content = file_get_contents($ratesCodesListFileURL);
+        $json    = json_decode($content, true);
+        
+        foreach($currArray as $key => $val) {
+            $txt = (isset($json[$key]['name'])) ? $json[$key]['name'] . ' (' . $key . ')' : $val;
+            
+            //echo $txt . '<br>';
+            $currArray[$key] = $txt;
+        }
+        
+        asort($currArray);
+        
+//        echo '<pre>';
+//        print_r($currArray);
+//        echo '</pre>';
+//        
+//        echo '<pre>';
+//        print_r($json);
+//        echo '</pre>';
+    }
+    
     /**
      * This function divides integer value by commas. F.e. 
      * 
