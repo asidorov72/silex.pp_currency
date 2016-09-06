@@ -60,8 +60,10 @@ class CurrencyController
             //var_dump($this->request->cookies->get("RATES_CODES"));
         }
     
-        ToolsHelper::addAssocElement($ratesCodesList, array('key' => $this->config['default_base_code'], 'value' => $this->config['default_base_code']));
-        
+        ToolsHelper::addAssocElement($ratesCodesList, array(
+                'key' => $this->config['default_base_code'], 'value' => $this->config['default_base_code'])
+            );
+        ToolsHelper::addCurrencyName($ratesCodesList, $this->config['currencies_JSON']);
         /*** FORM :: begin ***/
         
         /*

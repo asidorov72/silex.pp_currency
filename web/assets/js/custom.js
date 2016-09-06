@@ -6,23 +6,26 @@
 
 $( document ).ready(function() {
   
-    var currencyFromOb  = $("[name='form[currencyFrom]']");
-    var currencyToOb    = $("[name='form[currencyTo]']");
-    var currencyFromVal = "";
-    var currencyToVal   = "";
-    var elemToRestore   = "";
+    var currencyFromOb   = $("[name='form[currencyFrom]']");
+    var currencyToOb     = $("[name='form[currencyTo]']");
+    var currencyFromVal  = "";
+    var currencyToVal    = "";
+    var elemToRestoreId  = "";
+    var elemToRestoreTxt = "";
   
     function removeSelectedCode(elemToDelete) 
     {   
 //        if (elemToRestore.length > 0) {
 //            currencyToOb.append($("<option></option>").attr("value", elemToRestore).text(elemToRestore));
 //        }
-        if (elemToRestore.length > 0 && elemToRestore !== elemToDelete) {
-            currencyToOb.find('option[value='+elemToRestore+']').remove();
-            addOptionToSelectBox(currencyToOb[0], elemToRestore, elemToRestore, false);
+        if (elemToRestoreId.length > 0 && elemToRestoreId !== elemToDelete) {
+            currencyToOb.find('option[value='+elemToRestoreId+']').remove();
+            addOptionToSelectBox(currencyToOb[0], elemToRestoreId, elemToRestoreTxt, false);
         }
         currencyToOb.find('option[value='+elemToDelete+']').remove();
-        elemToRestore = elemToDelete;
+        elemToRestoreId  = elemToDelete;
+        elemToRestoreTxt = currencyFromOb.find('option[value='+elemToRestoreId+']').text();
+        //console.log(elemToRestoreTxt);
     }
     
     function sortSelectOptions(selector, skip_first) 
