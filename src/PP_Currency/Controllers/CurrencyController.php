@@ -5,6 +5,9 @@ namespace PP_Currency\Controllers;
 use PP_Currency\Helpers\UrlHelper,
     PP_Currency\Helpers\ToolsHelper;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -46,14 +49,20 @@ class CurrencyController
         $errors              = array();
         
         $currencyRepository  = $this->getCurrencyRepository();
-        $ratesCodesList      = ToolsHelper::getCurrencyCodes(
+        
+        if($this->request->cookies->has("RATES_CODES") === false){
+            $ratesCodesList  = ToolsHelper::getCurrencyCodes(
                 $currencyRepository->getLatestRates($latestRatesByBaseUrl)
             );
+            ToolsHelper::setCookie("RATES_CODES", serialize($ratesCodesList), strtotime("+1 year"));
+        } else {
+            $ratesCodesList = unserialize($this->request->cookies->get('RATES_CODES'));
+            //var_dump($this->request->cookies->get("RATES_CODES"));
+        }
+    
         ToolsHelper::addAssocElement($ratesCodesList, array('key' => $this->config['default_base_code'], 'value' => $this->config['default_base_code']));
         
         /*** FORM :: begin ***/
-        
-        //var_dump(date("d/m/Y"));
         
         /*
          * Default values for the form elements

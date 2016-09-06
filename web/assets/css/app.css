@@ -19,7 +19,7 @@ html, body {
 
 .mainWrap.callout {
     padding-bottom: 10px;
-    background: url('../images/shutterstock_215289142.jpg') no-repeat;
+    background: url('../images/shutterstock_215289142.jpg') top center no-repeat;
 }
 
 .mainWrap .alert-box-ul {
