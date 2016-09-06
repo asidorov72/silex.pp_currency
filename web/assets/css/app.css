@@ -19,7 +19,8 @@ html, body {
 
 .mainWrap.callout {
     padding-bottom: 10px;
-    background: url('../images/shutterstock_215289142.jpg') no-repeat;
+    background: url('../images/shutterstock_215289142.jpg') top center no-repeat;
+    /*background: url('../images/FreeGreatPicture.com-50216-to-discuss-issues-of-character.jpg') 0 0 no-repeat;*/
 }
 
 .mainWrap .alert-box-ul {
