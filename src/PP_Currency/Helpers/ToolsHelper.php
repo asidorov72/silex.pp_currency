@@ -1,6 +1,10 @@
 <?php
 namespace PP_Currency\Helpers;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
+
 class ToolsHelper
 {
     private $app;
@@ -13,7 +17,7 @@ class ToolsHelper
         $this->app = $app;
         $this->request = $app['request'];
         $this->session = $app['session'];
-        $this->config = $app['config'];
+        $this->config  = $app['config'];
     }
     
     /*
@@ -94,6 +98,19 @@ class ToolsHelper
     public static function formatDate(&$date) 
     {
         $date = preg_replace('/(\d{2})\/(\d{2})\/(\d{4})/i', '$3-$2-$1', $date);
+    }
+    
+    /**
+     * This function sets cookie
+     * 
+     * @param string $cookieName
+     * @param type $cookieValue
+     * @param number $expDate
+     * @param string $location
+     */
+    public static function setCookie($cookieName, $cookieValue, $expDate, $location = '/')
+    {
+        setcookie($cookieName, $cookieValue, $expDate, $location);
     }
     
 }
