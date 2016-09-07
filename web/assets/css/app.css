@@ -106,7 +106,6 @@ ul .rates-list h3 {
 
 .date-rates-wrap.row .row.collapse {
     margin-left: 0;
-    /* margin-right: 0; */
 }
 
 .ratesDateInput {
@@ -132,11 +131,6 @@ ul .rates-list h3 {
     display:inline-block;
     padding:7px 10px 7px 10px;
     font-size: larger;
-    /*color: #2199e8;
-    color: #0a0a0a;
-    background: none;
-    color: white;
-    background: orange;*/
 }
 
 .formElementsLevel {
