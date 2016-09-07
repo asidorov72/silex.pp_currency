@@ -207,7 +207,7 @@ class CurrencyController
         $outputRates = '';
         //$calcRates = number_format($amount * $crncyTo, 2);
         $calcRates = ToolsHelper::formatMoney($amount * $crncyToValue, true);
-        $outputRates = '<h3>' . $amount . ' <span>' . $crncyFromCode . '</span> = ' . $calcRates . ' <span>' . $crncyToCode . '</span></h3>';
+        $outputRates = '<h5>' . $amount . ' <span>' . $crncyFromCode . '</span> = ' . $calcRates . ' <span>' . $crncyToCode . '</span></h5>';
         $outputRates .= '<span>1 ' . $crncyFromCode . ' = ' . $crncyToValue . ' ' . $crncyToCode . '</span>';
         $outputRates .= ' /<span>' . date_format(date_create($ratesDate),"D, d M Y") . '</span>/';
         return $outputRates;

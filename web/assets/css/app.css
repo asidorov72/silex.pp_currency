@@ -85,7 +85,7 @@ ul .notice-list  {
     color: green;
 }
 
-ul .rates-list h3 {
+ul .rates-list h3, ul .rates-list h4, ul .rates-list h5 {
     color: #2199e8;
 }
 
