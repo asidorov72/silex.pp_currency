@@ -22,11 +22,12 @@ class CurrencyController
 
     public function __construct($app)
     {
-        $this->app = $app;
-        $this->twig = $app['twig'];
+        $this->app     = $app;
+        $this->twig    = $app['twig'];
         $this->request = $app['request'];
         $this->config  = $app['config'];
         $this->session = $app['session'];
+        $this->session->noscript = false;
     }
 
     /*
@@ -36,11 +37,24 @@ class CurrencyController
      */
     public function index()
     {
+        //echo "<noscript>" . $this->session->noscript = true . "</noscript>";
+        
+        //var_dump($this->request->query->get('nojs'));
+        //var_dump($this->request->query);
+        
+        $nojs = $this->request->query->get('nojs');
+        
+        if (isset($nojs) && $nojs == '1') {
+            $this->session->noscript = true;
+        }
+        
         $latestRatesByBaseUrl = UrlHelper::replaceParams(
                 $this->config['GET_REQUEST_URL']['rates_by_base'],
                 array('{CURRENCY_CODE}'), 
                 array($this->config['default_base_code'])
             );
+        
+            //var_dump($noJS);
 
         $resultRates         = array();
         $requestRes          = array();
@@ -73,6 +87,9 @@ class CurrencyController
             'amount' => '1',
             'ratesDate' => date("d/m/Y")
         );
+        
+        //var_dump($this->session->noscript);
+        //var_dump($this->session);
 
         $form = $this->app['form.factory']->createBuilder('form', $data, array('csrf_protection' => false))
             ->add('amount', 'text', array(
@@ -162,8 +179,10 @@ class CurrencyController
                 }
             }
             /* AJAX output :: begin */
-            echo json_encode($alerts);
-            exit();
+            if ($this->session->noscript === false) {
+                echo json_encode($alerts);
+                exit();
+            }
             /* AJAX output :: end   */
             $this->session->getFlashBag()->add( 'alerts', $alerts );
         }
