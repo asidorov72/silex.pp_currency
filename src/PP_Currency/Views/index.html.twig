@@ -23,13 +23,8 @@
 
 <body>
     
-       
-    {#% if resultRates|length %#}
-    {#{ dump(resultRates) }#}
-    {#% endif %#}
-    
     {{ form_start(form, {'name' : 'currencyForm', 'method' : 'post'}) }}
-    {#{ form_widget(form, { 'attr': {'class': 'currency_form'}}) }#}
+    {#{ form_start(form, {'name' : 'currencyForm', 'method' : 'post'}) }#}
     
     <!--<div class="row">
       <div class="large-12 columns">
@@ -44,17 +39,19 @@
                 <p>The PP Currency Converter is using the <span><a href="http://fixer.io/" target="_blank">Fixer.io</a></span> API's data - free JSON API for current and historical foreign exchange rates published by the European Central Bank.</p>
                 <p>The rates are updated daily around 4PM CET.</p>
                 
+                <div class="alert-box" id="ajax-alert-box"></div>
+                
                 {% for errors in app.session.getFlashBag.get('alerts') %}
                 <div data-alert class="alert-box">
                    <ul class="alert-box-ul">
                         {% if errors['alert'] is defined %}
                             {% for key, error in errors['alert'] %}
-                            <li style="color:red">{{ error|raw }}</li>
+                            <li class="alert-list">{{ error|raw }}</li>
                             {% endfor %}
                         {% endif %}
                         {% if errors['notice'] is defined %}
                             {% for key, error in errors['notice'] %}
-                            <li style="color:green">{{ error|raw }}</li>
+                            <li class="notice-list">{{ error|raw }}</li>
                             {% endfor %}
                         {% endif %}
                         {% if errors['rates'] is defined %}
@@ -115,6 +112,7 @@
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/vendor/foundation.js"></script>
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/app.js"></script>
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/foundation-datepicker.js"></script>
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/ajax.js"></script>
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/custom.js"></script> 
     {% endblock %}
 </body>
