@@ -161,6 +161,10 @@ class CurrencyController
                     $alerts['alert'][] = $error->getMessage();
                 }
             }
+            /* AJAX output :: begin */
+            echo json_encode($alerts);
+            exit();
+            /* AJAX output :: end   */
             $this->session->getFlashBag()->add( 'alerts', $alerts );
         }
             
@@ -169,7 +173,6 @@ class CurrencyController
         return $this->twig->render(
             '/index.html.twig',
             array(
-                'resultRates' => $resultRates,
                 'form' => $form->createView()
             )
         );
@@ -194,4 +197,5 @@ class CurrencyController
         $outputRates .= ' /<span>' . $ratesDate . '</span>/';
         return $outputRates;
     }
+    
 }

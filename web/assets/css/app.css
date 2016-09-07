@@ -17,6 +17,16 @@ html, body {
     text-transform: uppercase;
 }
 
+.spinner {
+    padding: 0;
+    margin: 30px 0 20px 30px;
+    width:16px;
+    /*width:128px;*/
+    height:11px;
+    background: url('../images/ajax-loader.gif') 0 0 no-repeat;
+    border: 0px solid #2199e8;
+}
+
 .mainWrap.callout {
     padding-bottom: 10px;
     background: url('../images/shutterstock_215289142.jpg') top center no-repeat;
@@ -55,6 +65,16 @@ html, body {
 ul .rates-list  {
     list-style-type: none;
     color: navy;
+}
+
+ul .alert-list  {
+    list-style-type: circle;
+    color: red;
+}
+
+ul .notice-list  {
+    list-style-type: circle;
+    color: green;
 }
 
 ul .rates-list h3 {
