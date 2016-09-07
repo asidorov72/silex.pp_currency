@@ -9,6 +9,13 @@ html, body {
     padding-left: 0;
 }
 
+.no-margin-left{
+    margin-left: 0;
+}
+.no-margin-top{
+    margin-top: 0;
+}
+
 .pad-left-6px {
      padding-left: 6px;
 }
