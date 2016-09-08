@@ -91,23 +91,22 @@ $( document ).ready(function() {
         sortSelectOptions("[name='"+dropDownListName+"']", false);
     }
     
-    function getTodayDate()
+    function getTodayDateSepBySlash()
     {
-        var d = new Date();
-
-        var month = d.getMonth()+1;
-        var day = d.getDate();
-        
-        var output = (day<10 ? '0' : '') + day + '/'
-            + (month<10 ? '0' : '') + month + '/'
-            + d.getFullYear();
-            
-        return output;
+        var shortDateFormat = 'dd/MM/yyyy';
+        //var TodaDateFormat = 'E, dd MMM yyyy';
+        var formattedDate = $.format.date(new Date(), shortDateFormat);
+        return formattedDate;
     }
     
-   
-  
-  
+    function getWidgetTodayDate () {
+        //var shortDateFormat = 'dd/MM/yyyy';
+        var TodayDateFormat = 'E, dd MMM yyyy';
+        var formattedDate = $.format.date(new Date(), TodayDateFormat);
+        return formattedDate;
+    }
+    
+    $("#ajax-alert-box").html('<span class="todayWidget">Today is ' + getWidgetTodayDate() + '</span>');
   
     $('#form_exchange').click(function(){
 
@@ -128,14 +127,10 @@ $( document ).ready(function() {
         })
     .trigger( "change" );
     
-    
     $('#form_refresh').click(function(){
-         
-        var today = getTodayDate();
-        $('#form_ratesDate').val(today);
+        $('#form_ratesDate').val(getTodayDateSepBySlash());
     });
     
-  
     /**
      * Foundation-datepicker code
      * http://foundation-datepicker.peterbeno.com/example.html

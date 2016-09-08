@@ -26,36 +26,44 @@
     
     {{ form_start(form, {'name' : 'currencyForm', 'method' : 'post'}) }}
     
-    <div class="row topMargin10 no-margin-left no-margin-top">
-        <div class="small-6 columns">
+    <div class="row no-margin-left">
+        <div class="large-8 columns__ ">
             <div class="mainWrap callout">
                 <h3>PP Currency Converter</h3>
                 <p>The PP Currency Converter is using the <span><a href="http://fixer.io/" target="_blank">Fixer.io</a></span> API's data - free JSON API for current and historical foreign exchange rates published by the European Central Bank.
                 The rates are updated daily around 4PM CET.</p>
                 
-                <div class="alert-box" id="ajax-alert-box"></div>
-                
-                {% for errors in app.session.getFlashBag.get('alerts') %}
-                <div data-alert class="alert-box">
-                   <ul class="alert-box-ul">
-                        {% if errors['alert'] is defined %}
-                            {% for key, error in errors['alert'] %}
-                            <li class="alert-list">{{ error|raw }}</li>
-                            {% endfor %}
-                        {% endif %}
-                        {% if errors['notice'] is defined %}
-                            {% for key, error in errors['notice'] %}
-                            <li class="notice-list">{{ error|raw }}</li>
-                            {% endfor %}
-                        {% endif %}
-                        {% if errors['rates'] is defined %}
-                            {% for key, error in errors['rates'] %}
-                            <li class="rates-list">{{ error|raw }}</li>
-                            {% endfor %}
-                        {% endif %}
-                   </ul>
+                 <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="alert-box" id="ajax-alert-box"></div>
+                    </div>
                 </div>
-                {% endfor %}
+                
+                <div class="row">
+                    <div class="medium-12 columns">
+                        {% for errors in app.session.getFlashBag.get('alerts') %}
+                        <div data-alert class="alert-box">
+                           <ul class="alert-box-ul">
+                                {% if errors['alert'] is defined %}
+                                    {% for key, error in errors['alert'] %}
+                                    <li class="alert-list">{{ error|raw }}</li>
+                                    {% endfor %}
+                                {% endif %}
+                                {% if errors['notice'] is defined %}
+                                    {% for key, error in errors['notice'] %}
+                                    <li class="notice-list">{{ error|raw }}</li>
+                                    {% endfor %}
+                                {% endif %}
+                                {% if errors['rates'] is defined %}
+                                    {% for key, error in errors['rates'] %}
+                                    <li class="rates-list">{{ error|raw }}</li>
+                                    {% endfor %}
+                                {% endif %}
+                           </ul>
+                        </div>
+                        {% endfor %}
+                     </div>
+                </div>
           
                 <div class="row">
                     <div class="medium-5 columns">
@@ -106,6 +114,7 @@
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/vendor/foundation.js"></script>
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/app.js"></script>
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/foundation-datepicker.js"></script>
+    <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/jquery-dateFormat.js"></script>
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/ajax.js"></script>
     <script type="text/javascript" src="{{ app.request.getSchemeAndHttpHost }}/assets/js/custom.js"></script> 
     {% endblock %}
