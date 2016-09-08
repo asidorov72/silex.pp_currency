@@ -26,7 +26,7 @@ html, body {
 
 .spinner {
     padding: 0;
-    margin: 20px 0 10px 50px;
+    margin: 25px 0 10px 100px;
     width:16px;
     /*width:128px;*/
     height:11px;
@@ -38,12 +38,31 @@ html, body {
     padding-bottom: 10px;
     background: url('../images/shutterstock_215289142.jpg') top center no-repeat;
     border: 5px solid #2199e8;
+    min-height: 530px;
     /*border: 5px solid yellow;*/
 }
 
+.mainWrap .alert-box {
+    position: relative;
+    padding-top: 15px;
+    min-height: 95px;
+    border: 1px dotted #ccc;
+}
+
 .mainWrap .alert-box-ul {
-    margin-top: 15px;
-    margin-bottom: 7px;
+    /*margin-top: 15px;
+    margin-bottom: 7px;*/
+    padding-left: 20px;
+    border: 0px solid red;
+}
+
+.mainWrap .alert-box-ul li {
+}
+
+.todayWidget {
+    display: block;
+    margin: 20px 0 0 50px;
+    color: grey;
 }
 
 .mainWrap p {
@@ -64,10 +83,6 @@ html, body {
    width: 100%;
    margin-left: auto;
    margin-right: auto;
-}
-
-.row.topMargin10 {
-   margin-top: 1rem; 
 }
 
 ul .rates-list  {
